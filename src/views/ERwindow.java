@@ -19,7 +19,6 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 
 
 
@@ -32,7 +31,6 @@ public class ERwindow extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JButton btnRun;
-	private JTextArea displayResults;
 
 	/**
 	 * Launch the application.
@@ -53,10 +51,8 @@ public class ERwindow extends JFrame {
 
 	// Create the frame.
 	public ERwindow() {
-
 		initComponent();
 		createEvents();
-
 	}
 
 	// code for initializing events
@@ -70,14 +66,10 @@ public class ERwindow extends JFrame {
 		setBounds(100, 100, 559, 228);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		displayResults = new JTextArea();
-		displayResults.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.add(displayResults);
-		
 		setContentPane(contentPane);
-
+		
 		btnRun = new JButton("Run");
-
+		
 		textField = new JTextField();
 		textField.setColumns(10);
 
@@ -106,11 +98,9 @@ public class ERwindow extends JFrame {
 	// code for creating events
 	private void createEvents() {
 		try {
-
 			btnRun.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					SQLFetcher.query(textField);
-					//JOptionPane.showMessageDialog(null, SQLFetcher.query(textField));
+					JOptionPane.showMessageDialog(null, SQLFetcher.query1(textField), "Query Result", 1 );
 				}
 
 			});

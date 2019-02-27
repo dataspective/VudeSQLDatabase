@@ -10,9 +10,14 @@ import java.sql.Statement;
 
 import javax.swing.JTextField;
 
-public class SQLFetcher {
-	public static void query(JTextField textField) {
 
+
+public class SQLFetcher {
+	
+
+	
+	public static StringBuilder query1(JTextField textField) {
+		StringBuilder sb2=new StringBuilder();
 		ResultSet rs = null;
 		Statement stmt = null;
 		Connection conn = null;
@@ -38,24 +43,30 @@ public class SQLFetcher {
 
 			// Step 5.1: Get the column header info for report writing
 			int numColumns = metaData.getColumnCount();
-	
-			StringBuilder sb1=new StringBuilder();
-	
+			
 			for(int i = 1; i <= numColumns; i++)
 			{
-			   sb1.append(String.format(" %-10s",metaData.getColumnLabel(i)));
+			   sb2.append(String.format(" %-20s",metaData.getColumnLabel(i)));
+			   System.out.print(String.format(" %-20s",metaData.getColumnLabel(i)));
 			}
-				System.out.println(sb1);
-		
+			System.out.println("");
+			sb2.append("\n");
 			// Step 6: Print out the results
 			 
 			while (rs.next()) {
 				for (int i = 1; i <= numColumns; i++) {
 					Object obj = rs.getObject(i);
-					if (obj != null)
-					 System.out.print(String.format(" %-10s",rs.getObject(i).toString()));
+					if (obj != null) {
+						sb2.append(String.format(" %-20s",rs.getObject(i).toString()));
+					 System.out.print(String.format(" %-20s",rs.getObject(i).toString()));
+					}else {
+						
+						sb2.append(String.format(" %-20s","NULL"));
+						 System.out.print(String.format(" %-20s","NULL"));
+					}
 				}
 				System.out.println("");
+				sb2.append("\n");
 			}
      
 		} catch (Exception exc) {
@@ -72,5 +83,8 @@ public class SQLFetcher {
 				se.printStackTrace();
 			}
 		}
+		return sb2;
+		
 	}
+	
 }
